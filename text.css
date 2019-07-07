@@ -1,0 +1,139 @@
+.time {
+  font-family: 'Share Tech Mono', monospace;
+  font-size: 1em;
+  z-index: 25;
+}
+
+body {
+  background-color: green;
+  animation-name: toBlack;
+  animation-duration: 2s;
+  animation-delay: .2s;
+  animation-fill-mode: both;
+}
+
+.text {
+  font-family: 'Quicksand', sans-serif;
+  font-size: 3em;
+  animation-name: text;
+  animation-duration: 1s;
+  border-radius: .5em;
+  width: fit-content;
+}
+
+.them {
+  float: left;
+  background-color: gray;
+  color: black;
+}
+
+.me {
+  float: right;
+  background-color: blue;
+  color: white;
+}
+
+div.textContainer {
+  width: 100%;
+  display: inline-block;
+  margin-bottom: -5em;
+}
+
+@keyframes toBlack {
+  from {background-color: green; color: green;}
+  to {background-color: black; color: white;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+@keyframes text {
+  from {text-shadow: .1em .1em 1em orange}
+  to {text-shadow: none}
+}
+
+#wrong {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 20;
+  background-color: black;
+  color: red;
+  opacity: 0;
+
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  animation-name: fadeIn;
+  animation-duration: 5s;
+}
+
+#wrong p {
+  animation-fill-mode: both;
+  animation-play-state: inherit;
+  animation-name: fadeIn;
+  animation-delay: 2s;
+  animation-duration: 5s;
+  font-size: 10em;
+  font-family: 'Akronim', cursive;
+
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%); /* from https://css-tricks.com/centering-css-complete-guide/ */
+}
+
+#text_input:focus {
+  display: block;
+  border: 5px solid blue;
+}
+#text_input {
+  width: 100%;
+  display: none;
+  position: fixed;
+  right: 0px;
+  bottom: 0px;
+  max-width: 50%;
+}
+
+#wake {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 20;
+  background-color: #333;
+  color: red;
+  opacity: 0;
+
+  animation-fill-mode: both;
+  animation-play-state: paused;
+  animation-name: fadeIn;
+  animation-duration: 2s;
+}
+
+#wake p {
+  font-size: 10em;
+  font-family: 'Playball', cursive;
+
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%); /* from https://css-tricks.com/centering-css-complete-guide/ */
+}

@@ -1,0 +1,161 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Test Results</title>
+<link href="https://fonts.googleapis.com/css?family=Shadows+Into+Light" rel="stylesheet">
+<link rel="stylesheet" href="test.css">
+</head>
+<body>
+<div id = "form">
+<p><span style="float:left">Math Test</span><span style="float:right">Today</p>
+
+<br>
+
+<p><span style="float:right">Name: Mark <span class="wrong">Last name?</span></span></p>
+
+<div id="q1">
+<p>Question 1: 2 + 2 = ?</p>
+
+<input type="radio" name="q1" id="q14" value="4">
+<label for="q14">4</label>
+<br>
+<input type="radio" name="q1" id="q18" value="8">
+<label for="q18">8</label>
+<br>
+<input type="radio" name="q1" id="q15" value="5">
+<label for="q15">5</label>
+
+<p class="wrong">
+Really? Mark, come on this test was supposed to be an easy A... how do you not know that 2 + 2 = 4?
+</p>
+
+</div>
+
+<div id="q2">
+<p>Question 2: 3 is even.</p>
+
+<input type="radio" name="q2" id="q2t" value="true">
+<label for="q2t">true</label>
+<br>
+<input type="radio" name="q2" id="q2f" value="false">
+<label for="q2f">false</label>
+
+<p class="wrong">
+Mark: 3 = 2(1) + 1; textbook definition odd (i.e., not even)
+</p>
+
+</div>
+
+<div id="q3">
+<p>Question 3: sin(0) = ?</p>
+
+<input type="radio" name="q3" id="q30" value="0">
+<label for="q30">0</label>
+<br>
+<input type="radio" name="q3" id="q31" value="pi">
+<label for="q31">pi</label>
+<br>
+<input type="radio" name="q3" id="q32" value="3">
+<label for="q32">3</label>
+<br>
+<input type="radio" name="q3" id="q33" value="5">
+<label for="q33">5</label>
+<br>
+<input type="radio" name="q3" id="q34" value="6">
+<label for="q34">6</label>
+<br>
+
+<p class="wrong">
+Mark, think of the unit circle (remember, sin = y).
+<br>
+<img src="graph.png" style="width:10em"/>
+</p>
+
+</div>
+
+<div id="q4">
+<p>Question 4: I feel like I'm able to choose the right answer.</p>
+
+<input type="radio" name="q4" id="q40" value="sometimes">
+<label for="q40">sometimes</label>
+<br>
+<input type="radio" name="q4" id="q41" value="always">
+<label for="q41">always</label>
+<br>
+<input type="radio" name="q4" id="q42" value="never">
+<label for="q42">never</label>
+
+<p class="wrong">
+This is a new feeling; is it not?
+</p>
+
+</div>
+
+<div id="q5">
+<p>Question 5: Free will exists</p>
+
+<input type="radio" name="q5" id="q50" value="yes">
+<label for="q50">yes</label>
+<br>
+<input type="radio" name="q5" id="q51" value="no">
+<label for="q51">no</label>
+<br>
+<input type="radio" name="q5" id="q52" value="I'm not sure">
+<label for="q52">I'm not sure</label>
+
+<p class="wrong">
+...
+
+<br>
+
+Score: 0/5
+</p>
+
+</div>
+
+</div>
+
+<p class="wrong">
+
+
+Mark,
+
+<br>
+<br>
+
+This does not appear to be representative of your typical level of performance. Please schedule a time to see me (not during class!).
+
+<br>
+<br>
+
+Thanks,
+
+<br>
+
+Mr. Jones
+</p>
+
+<a href="email.html">
+<img src="compose.png">
+</a>
+
+<script>
+document.getElementById("form").onclick = function(e) {
+  e.preventDefault();
+}
+var params = new URLSearchParams(window.location.search);
+var keys = params.keys();
+var key = keys.next();
+while(!key.done) {
+  var id = key.value;
+  var val = params.get(id);
+  [...document.getElementById(id).children].forEach(function(e) {
+    if(e.value == val) {
+      e.checked = true;
+    }
+  });
+  key = keys.next();
+}
+</script>
+</body>
+</html>

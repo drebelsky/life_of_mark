@@ -1,0 +1,8 @@
+.lookat {
+  border: 5px solid red;
+}
+.wrong {
+  color: red;
+  font-size: 1.5em;
+  font-family: 'Shadows Into Light', cursive;
+}

@@ -1,0 +1,90 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Your Email Program</title>
+<link rel="stylesheet" href="email.css">
+</head>
+<body>
+<audio src="text.mp3" id="sound"></audio>
+<p id="msg">New Message</p>
+<div id="writes">
+<input type="text" class="span" id="to" placeholder="To">
+<hr>
+<input type="text" class="span" id="subject" placeholder="Subject">
+<hr>
+<div id = "main">
+Dear Mr. Jones,
+<br>
+<br>
+You told me to schedule a time to meet, so here goes. Do any of the following times work for you?
+<br>
+<br>
+After school today
+<br>
+Before school tomorrow
+<br>
+After school tomorrow
+<br>
+Before school overmorrow
+<br>
+After school overmorrow
+
+<br>
+<br>
+Thanks,
+<br>
+Mark
+</div>
+</div>
+
+<input type="button" id="send" value="Send"/>
+<script>
+document.getElementById("main").style.opacity = "0";
+setTimeout(()=>{document.getElementById("main").style.transition = "opacity 3s"}, 1000);
+var done = {to: false, subject: false};
+var to_index = 0;
+document.getElementById("to").onkeypress = function(event) {
+  var msg = "jones@math.lincolnk-12.us";
+  event.preventDefault();
+  to_index++;
+  to_index = Math.min(to_index, msg.length + 1);
+  this.value = msg.slice(0, to_index);
+  if(this.value == msg) {
+    done.to = true;
+    if(done.subject) {
+      displayContent();
+    }
+  }
+}
+var subject_index = 0;
+document.getElementById("subject").onkeypress = function(event) {
+  var msg = "Last Math Test";
+  event.preventDefault();
+  subject_index++;
+  subject_index = Math.min(subject_index, msg.length + 1);
+  this.value = msg.slice(0, subject_index);
+  if(this.value == msg) {
+    done.subject = true;
+    if(done.to) {
+      displayContent();
+    }
+  }
+}
+function displayContent() {
+  setTimeout(function() {
+    document.getElementById("main").style.opacity = "1";
+  });
+}
+
+document.getElementById("send").onclick = function() {
+  if(!(done.to && done.subject)) {
+    return false;
+  }
+  document.getElementById("sound").play();
+}
+document.getElementById("sound").onended = function() {
+  window.location = "sent.html";
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Your Email Program</title>
+<link rel="stylesheet" href="sent.css"/>
+</head>
+<body>
+<div class="email">
+  <p><b>Mark</b> <span style="color: gray">&lt;mark@student.lincolnk-12.org>
+  <span style="float: right">Just Now</span></span></p>
+  <p><span style="color: gray; font-size: .8em;">to: John Jones &lt;jones@math.lincolnk-12.us></p>
+  <p>
+  hey john, 
+
+  <br>
+  <br>
+
+  u told me to schedule a time to meet, but why should i?
+
+  <br>
+  <br>
+  later,
+  <br>
+  mark
+  </p>
+</div>
+<hr>
+<div class="email">
+  <p><b>John Jones</b> <span style="color: gray">&lt;john@math.lincolnk-12.org>
+  <span style="float: right">Just Now</span></span></p>
+  <p><span style="color: gray; font-size: .8em;">to: Mark &lt;mark@student.lincolnk-12.us></p>
+  <p>
+  Mark,
+  <br>
+  <br>
+  I want to give you the benefit of the doubt here: I assume you did <i>not</i> mean to send that last email. If you respond to this email legitimately, I will disregard your prior email.
+  <br>
+  Thanks so much,
+  <br>
+  <br>
+  Mr. Jones
+  </p>
+  <div class="reply">
+    <img src="reply.svg"/>
+    Reply
+  </div>
+</div>
+<script>
+document.getElementsByClassName("reply")[0].onclick = function() {
+  window.location = "email2.html";
+}
+</script>
+</body>
+</html>

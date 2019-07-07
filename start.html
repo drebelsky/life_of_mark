@@ -1,0 +1,63 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Start</title>
+<link rel="stylesheet" href="start.css"/>
+<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono" rel="stylesheet">
+</head>
+<body>
+<div id="initial">
+<p>Click to start</p>
+</div>
+<audio src="text.mp3" id="text"></audio>
+<script>
+var message = "Time: 20:00  ";
+var time = document.createElement("p");
+p = document.body.appendChild(time);
+p.className = "time";
+var i = 0;
+function addChar() {
+  p.textContent = message.slice(0, i);
+  i += 1;
+  if(i == message.length + 1) {
+    clearInterval(interval);
+    setTimeout(function(){
+      document.body.style.animationName = "toDark";
+      document.body.style.animationDuration = "3s";
+      document.body.style.animationFillMode = "forwards";
+      p.style.animationPlayState = "running";
+      }, 1000);
+    interval = setInterval(()=>{increaseTime(1.1)}, 10);
+  }
+}
+time.hour = 20;
+time.minute = 0;
+time.done = false;
+function increaseTime(increase) {
+  if(!time.done) {
+    time.minute += increase;
+    time.hour += Math.floor(time.minute/60);
+    time.minute %= 60;
+    time.hour %= 24;
+    p.textContent = "Time: " + time.hour.toString().padStart(2, "0") + ":" + Math.floor(time.minute).toString().padStart(2, "0");
+    if(time.hour == 3 && time.minute > 23) {
+      time.done = true;
+    }
+  }
+  else {
+    clearInterval(interval);
+    document.getElementById("text").play();
+    document.body.style.animationName = "toGreen";
+    document.body.style.animationDuration = ".8s";
+    document.body.style.animationFillMode = "forwards";
+    setTimeout(function(){window.location = "text.html";}, document.getElementById("text").duration * 1000);
+  }
+}
+document.body.onclick = function() {
+  document.body.onclick = function(){};
+  document.body.removeChild(document.getElementById("initial"));
+  interval = setInterval(addChar, 100);
+}
+</script>
+</body>
+</html>

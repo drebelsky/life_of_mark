@@ -1,0 +1,16 @@
+body {
+  font-family: Arial;
+}
+.reply img {
+  width: 1em;
+  margin-bottom: -2px;
+}
+.reply {
+  padding: 3px;
+  border: 2px solid black;
+  border-radius: 5px;
+  width: fit-content;
+}
+.reply:hover {
+  background-color: lightgray;
+}

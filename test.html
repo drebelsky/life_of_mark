@@ -1,0 +1,171 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Math Test</title>
+<link rel="stylesheet" href="test.css">
+</head>
+<body>
+<form action="fail.html">
+<p><span style="float:left">Math Test</span><span style="float:right">Today</p>
+
+<br>
+
+<p><span style="float:right">Name:<input type="text" id="name"></span></p>
+
+<div id="q1">
+<p>Question 1: 2 + 2 = ?</p>
+
+<input type="radio" name="q1" id="q14" value="4">
+<label for="q14">4</label>
+<br>
+<input type="radio" name="q1" id="q18" value="8">
+<label for="q18">8</label>
+<br>
+<input type="radio" name="q1" id="q15" value="5">
+<label for="q15">5</label>
+
+</div>
+
+<div id="q2">
+<p>Question 2: 3 is even.</p>
+
+<input type="radio" name="q2" id="q2t" value="true">
+<label for="q2t">true</label>
+<br>
+<input type="radio" name="q2" id="q2f" value="false">
+<label for="q2f">false</label>
+
+</div>
+
+<div id="q3">
+<p>Question 3: sin(0) = ?</p>
+
+<input type="radio" name="q3" id="q30" value="0">
+<label for="q30">0</label>
+<br>
+<input type="radio" name="q3" id="q31" value="pi">
+<label for="q31">pi</label>
+<br>
+<input type="radio" name="q3" id="q32" value="3">
+<label for="q32">3</label>
+<br>
+<input type="radio" name="q3" id="q33" value="5">
+<label for="q33">5</label>
+<br>
+<input type="radio" name="q3" id="q34" value="6">
+<label for="q34">6</label>
+<br>
+
+</div>
+
+<div id="q4">
+<p>Question 4: I feel like I'm able to choose the right answer.</p>
+
+<input type="radio" name="q4" id="q40" value="sometimes">
+<label for="q40">sometimes</label>
+<br>
+<input type="radio" name="q4" id="q41" value="always">
+<label for="q41">always</label>
+<br>
+<input type="radio" name="q4" id="q42" value="never">
+<label for="q42">never</label>
+
+</div>
+
+<div id="q5">
+<p>Question 5: Free will exists</p>
+
+<input type="radio" name="q5" id="q50" value="yes">
+<label for="q50">yes</label>
+<br>
+<input type="radio" name="q5" id="q51" value="no">
+<label for="q51">no</label>
+<br>
+<input type="radio" name="q5" id="q52" value="I'm not sure">
+<label for="q52">I'm not sure</label>
+
+</div>
+
+<br>
+
+<input type="submit" id="submit" value="Submit!"/>
+</form>
+
+<script>
+var name_index = 0;
+document.getElementById("name").onkeypress = function(event) {
+  event.preventDefault();
+  name_index++;
+  name_index = Math.min(name_index, "Mark".length + 1);
+  this.value = "Mark".slice(0, name_index);
+}
+function switchValues(id1, id2) {
+    var input1 = document.getElementById(id1);
+    var input2 = document.getElementById(id2);
+    var value1 = input1.value;
+    var value2 = input2.value;
+    input1.id = id2;
+    input2.id = id1;
+    input1.value = value2;
+    input2.value = value1;
+    var label1 = document.querySelector("label[for=" + id1 + "]");
+    var label2 = document.querySelector("label[for=" + id2 + "]");
+    var text1 = label1.textContent;
+    var text2 = label2.textContent;
+    label1.textContent = text2;
+    label1.htmlFor = id2;
+    label2.textContent = text1;
+    label2.htmlFor = id1;
+}
+document.getElementById("q1").onclick = function(event) {
+  if(event.target.id == "q14") {
+    switchValues("q14", Math.random() > .5 ? "q15" : "q18")
+  }
+}
+document.getElementById("q2").onclick = function(event) {
+  if(event.target.id == "q2f") {
+    switchValues("q2f", "q2t")
+  }
+}
+document.getElementById("q3").onclick = function(event) {
+  if(event.target.id == "q30") {
+    switchValues("q30", "q3" + (Math.round(Math.random() * 3) + 1));
+  }
+}
+document.getElementById("q4").onclick = function(event) {
+  if(event.target.id == "q41" || event.target.id == "q40") {
+    switchValues(event.target.id, "q42");
+  }
+}
+document.getElementById("q5").onclick = function(event) {
+  if(event.target.id == "q50" || event.target.id == "q52") {
+    switchValues("q51", event.target.id);
+  }
+}
+var q;
+for(var i = 1; i <= 5; i++) {
+  q = document.getElementById("q"+i); 
+  q.onchange = q.onclick;
+  [...q.children].forEach(e => e.checked = false);
+}
+document.getElementById("submit").onclick = function(event) {
+  [...document.querySelectorAll(".lookat")].forEach(e => e.classList.remove("lookat"));
+  if(document.getElementById("name").value != "Mark") {
+    alert("You need to fill out your name!");
+    document.getElementById("name").classList.add("lookat");
+    event.preventDefault();
+    return false;
+  }
+  for(var q = 1; q <= 5; q++) {
+    if([...document.getElementById("q"+q).children].filter(x => x.checked).length == 0) {
+      alert("You need to answer question " + q + "!");
+      document.getElementById("q" + q).classList.add("lookat");
+      event.preventDefault();
+      return false;
+    }
+  }
+  window.location = "fail.html";
+}
+</script>
+</body>
+</html>

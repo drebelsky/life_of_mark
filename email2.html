@@ -1,0 +1,37 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Your Email Program</title>
+<link rel="stylesheet" href="email.css">
+</head>
+<body>
+<audio src="text.mp3" id="sound"></audio>
+<p id="msg">New Message</p>
+<div id="writes">
+<span class="span">jones@math.lincolnk12.org</span>
+<hr>
+<span class="span">Futility</span>
+<hr>
+<div id="main2">
+Dear Mr. Jones,
+<br>
+<br>
+I guess it doesn't really matter what I write here since no matter what I write, you'll get something different. While endlessly frustrating, I guess there's not much to do: I've resigned myself to this fate.
+<br>
+<br>
+- Mark
+</div>
+</div>
+
+<input type="button" id="send" value="Send"/>
+<script>
+
+document.getElementById("send").onclick = function() {
+  document.getElementById("sound").play();
+}
+document.getElementById("sound").onended = function() {
+  window.location = "sent2.html";
+}
+</script>
+</body>
+</html>

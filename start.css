@@ -1,0 +1,56 @@
+.time {
+  font-family: 'Share Tech Mono', monospace;
+  /* font-size: 10em;*/
+  animation-name: fontShrink;
+  /*animation-delay: 2s;*/
+  animation-duration: "2s";
+  animation-duration: 3s;
+  animation-play-state: paused;
+  animation-fill-mode: backwards;
+}
+@keyframes toDark {
+  from {background-color: white; color: black;}
+  to {background-color: black; color: white;}
+}
+
+@keyframes fontShrink {
+  from {font-size: 10em;};
+  to {font-size: 1em;};
+}
+
+@keyframes toGreen {
+  from {background-color: black; color: white;}
+  to {background-color: green; color: green;}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+
+#initial {
+  position: fixed;
+  left: 0;
+  top: 0;
+
+  padding: 0;
+  margin: 0;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 20;
+  background-color: lightblue;
+  color: white;
+}
+
+#initial p {
+  font-size: 10em;
+  font-family: 'Share Tech Mono', monospace;
+
+  text-align: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%); /* from https://css-tricks.com/centering-css-complete-guide/ */
+}

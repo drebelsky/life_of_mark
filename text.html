@@ -1,0 +1,146 @@
+<html>
+<head>
+  <link rel="icon" type="image/png" href="favicon.png">
+<title>Text</title>
+<link rel="stylesheet" href="text.css">
+<link href="https://fonts.googleapis.com/css?family=Quicksand|Share+Tech+Mono" rel="stylesheet">
+</head>
+<body style="background-color: green; color: green">
+<audio src="shush.mp3" id="shush"></audio>
+<audio src="sleep_music.mp3" id="music"></audio>
+<audio src="alarm.mp3" id="alarm" loop="loop"></audio>
+<input type="text" id="text_input" class="text" placeholder="Type here" />
+<script>
+function addText(text, me) {
+  var div = document.createElement("div");
+  div.className = "textContainer";
+  var elem = document.createElement("p");
+  elem.className = "text " + (me ? "me" : "them");
+  elem.textContent = text;
+  div.appendChild(elem);
+  document.body.appendChild(div);
+  return elem;
+}
+function delayInner(time) {
+  return function(func) {
+    return new Promise(function(resolve, reject) {
+      setTimeout(function() {
+        func();
+        resolve();
+      }, time);
+    });
+  }
+}
+
+function delay(time) {
+  return function(func) {
+    return function() {
+      return delayInner(time)(func);
+    }
+  }
+}
+
+function nothing() {
+
+}
+
+function wrapText(text, me) {
+  return function() {
+    addText(text, me);
+  }
+}
+
+function forceText(text) {
+  var i = 0;
+  return new Promise(function(resolve, reject) {
+    var input = document.getElementById("text_input");
+    input.style.display = "block";
+    document.body.onclick = function(){input.focus()};
+    input.focus();
+    input.onkeypress = function(event) {
+      event.preventDefault();
+      i += 1;
+      input.value = text.slice(0, i);
+      text_input.select();
+      text_input.selectionStart = i;
+      text_input.selectionEnd = i;
+      text_input.scrollLeft = text_input.scrollWidth;
+      if (i == (text.length + 1)) {
+        input.onkeypress = nothing;
+        document.body.onclick = nothing;
+        input.value = "";
+        input.style.display = "none";
+        resolve();
+      }
+    }
+  });
+}
+
+function wrapForce(text) {
+  return function() {
+    return forceText(text);
+  }
+}
+
+delay(300)(function() {
+  var text = addText("u up?", false);
+  text.animationDelay = "2s";
+  text.animationFillMode = "both";
+})().then(
+  delay(2000)(wrapText("I am now", true))
+).then(
+  delay(1000)(wrapText("Good", false))
+).then(
+  delay(100)(wrapText("Sorry who is this?", true))
+).then(
+  delay(1500)(wrapText("Get some sleep :) <3", false))
+).then(
+  wrapForce("You never told me who you were.")
+).then(
+  delay(0)(wrapText("Thanks, I will", true))
+).then(
+  delay(1000)(nothing)
+).then(
+  wrapForce("That's not what I said!")
+).then(
+  delay(0)(wrapText("You too", true))
+).then(
+  wrapForce("HELP? ... is there ANYBODY there??")
+).then(
+  delay(0)(wrapText("G'night", true))
+).then(
+  delay(1000)(() => document.getElementById("wrong").style.animationPlayState = "running")
+).then(
+  delay(2500)(function() {
+    var music = document.getElementById("music");
+    music.play();
+  })
+).then(
+  delay(500)(function() {
+    document.getElementById("shush").play();
+  })
+).then(
+  delay(1000)(function() {
+    var p = document.getElementById("wrong").children[0];
+    p.style.animationDirection = "reverse";
+    p.style.animationDuration = "20s";
+  })
+);
+document.getElementById("music").onended = function() {
+  delay(2000)(function() {
+    document.getElementById("alarm").play();
+  })().then(delay(1000)(function() {
+    document.body.onclick = function(){window.location = "wakeup.html"};
+    document.getElementById("wake").style.animationPlayState = "running";
+  }));
+}
+</script>
+<p class="time">Time: 03:23</p>
+<div id="wrong">
+<p>Shhh... go to sleep</p>
+</div>
+<div id="wake">
+<p>Click to Wakeup</p>
+</div>
+</body>
+</html>
