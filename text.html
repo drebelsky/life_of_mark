@@ -56,6 +56,7 @@ function forceText(text) {
     var input = document.getElementById("text_input");
     input.style.display = "block";
     document.body.onclick = function(){input.focus()};
+    document.body.ontouchstart = function(){input.focus()};
     input.focus();
     input.onkeypress = function(event) {
       event.preventDefault();
@@ -68,6 +69,7 @@ function forceText(text) {
       if (i == (text.length + 1)) {
         input.onkeypress = nothing;
         document.body.onclick = nothing;
+        document.body.ontouchstart = nothing;
         input.value = "";
         input.style.display = "none";
         resolve();
@@ -131,6 +133,7 @@ document.getElementById("music").onended = function() {
     document.getElementById("alarm").play();
   })().then(delay(1000)(function() {
     document.body.onclick = function(){window.location = "wakeup.html"};
+    document.body.ontouchstart = function(){window.location = "wakeup.html"};
     document.getElementById("wake").style.animationPlayState = "running";
   }));
 }
