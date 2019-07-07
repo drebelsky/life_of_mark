@@ -58,6 +58,11 @@ document.body.onclick = function() {
   document.body.removeChild(document.getElementById("initial"));
   interval = setInterval(addChar, 100);
 }
+document.body.ontouchstart = function() {
+  document.body.ontouchstart = function(){};
+  document.body.removeChild(document.getElementById("initial"));
+  interval = setInterval(addChar, 100);
+}
 </script>
 </body>
 </html>
